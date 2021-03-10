@@ -49,7 +49,10 @@
                 echo "<section style='margin-left:400px;font-size:20px'>" . substr($name,1,strlen($name)-2) . "<br>" . substr($design,1,strlen($design)-2) . "</section>" ;
                 
             ?>
-			<h2>Student Details</h2>
+			
+			<a href="view.php" style="margin-left:-400px;margin-top:200px;"><button class="btn btn-primary">View Student details</button></a>
+			
+			<h2>Student Details </h2>
 			<form method="POST">
 				<label  style="margin-top:19px;margin-right:40px;">Register No</label><br><input type="text" name="rno" id="rno" placeholder="Enter Register No"  style="margin-bottom:-20px;">
 				<button name="submit" value="submit" id="staffid" class="btn btn-success">Submit</button>
@@ -105,8 +108,12 @@
                     
 					$sql1 = "SELECT arrearcount FROM student where registerno = '$rno'";
 					$result1=$conn->query($sql1);
-					if($result1->num_rows == 1){
+					$row = $result1->fetch_assoc();
+					// echo "<script> window.alert(".$row['arrearcount'].");</script>";
+					if($row['arrearcount'] != "")
+					{
 						echo "<script>window.alert('Already exists')</script>";
+						
 					}
 					else{
 

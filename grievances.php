@@ -81,7 +81,6 @@ if(isset($_POST['submit']))
 	$faculty=$_POST['faculty'];
 	$check= $_POST['yes'];
 
-	echo "<script>alert('$check')</script>";
 	
 	$sql="INSERT INTO grievances (registerno,transport,hostel,canteen,remarks,issue) VALUES ('$rno','$transport','$hostel','$canteen','$academic','$faculty')";
 	$sql1="INSERT INTO grievances (registerno,issue) VALUES ('$rno','$faculty')";
@@ -96,25 +95,25 @@ if(isset($_POST['submit']))
 	if ($result->num_rows==1) {
 		if($check == "on"){
 			if(mysqli_query($conn,$sql3)){
-				echo"<script type='text/javascript'>window.alert('Successfully Completed1');window.location='student.php';</script>";
+				echo"<script type='text/javascript'>window.alert('Successfully Completed');window.location='student.php';</script>";
 			}
 			else{
-				echo"<script type='text/javascript'>window.alert('Something went wrong1,Please try again after some time');window.location='grievances.php';</script>";
+				echo"<script type='text/javascript'>window.alert('Something went wrong,Please try again after some time');window.location='grievances.php';</script>";
 			}
 		}
 		else{
 			if(mysqli_query($conn,$sql4)){
-				echo"<script type='text/javascript'>window.alert('Successfully Completed2');window.location='student.php';</script>";
+				echo"<script type='text/javascript'>window.alert('Successfully Completed');window.location='student.php';</script>";
 			}
 			else{
-				echo"<script type='text/javascript'>window.alert('Something went wrong2,Please try again after some time');window.location='grievances.php';</script>";
+				echo"<script type='text/javascript'>window.alert('Something went wrong,Please try again after some time');window.location='grievances.php';</script>";
 			}
 		}
 	}
 	else{
 		if($check == "on"){
 			if(mysqli_query($conn,$sql)){
-				echo"<script type='text/javascript'>window.alert('Successfully Completed3');window.location='student.php';</script>";
+				echo"<script type='text/javascript'>window.alert('Successfully Completed');window.location='student.php';</script>";
 			}
 			else{
 				echo"<script type='text/javascript'>window.alert('Something went wrong,Please try again after some time');window.location='grievances.php';</script>";
@@ -122,7 +121,7 @@ if(isset($_POST['submit']))
 		}
 		else{
 			if(mysqli_query($conn,$sql1)){
-				echo"<script type='text/javascript'>window.alert('Successfully Completed4');window.location='student.php';</script>";
+				echo"<script type='text/javascript'>window.alert('Successfully Completed');window.location='student.php';</script>";
 			}
 			else{
 				echo"<script type='text/javascript'>window.alert('Something went wrong,Please try again after some time');window.location='grievances.php';</script>";
