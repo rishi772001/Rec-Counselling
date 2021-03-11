@@ -1,14 +1,9 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-		<style>
-			th{
-				font-weight:800;
-			}
-			.container{
-				margin-top:30px;
-			}
-		</style>
+		<link rel="stylesheet" href="style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	</head>
 	<body>
 		<?php 

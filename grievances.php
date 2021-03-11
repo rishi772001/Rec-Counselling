@@ -1,32 +1,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-		<style>
-		.main{
-			background-color:#800080;
-			color:white;
-			padding: 30px;
-		}
-		.container{
-			margin-top:60px;
-		}
-		textarea{
-			height: 10vh;
-			width: 40vw;
-		}
-		img{
-			height:100px;
-		}
-		.image{
-			text-align:center;
-		}
-		label{
-			font-size:20px;
-		}
-		h2{
-			margin:30px;
-		}
-		</style>
+		<link rel="stylesheet" href="style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
 		<section class="image">

@@ -1,31 +1,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-		<style>
-		.main{
-			background-color:#800080;
-			color:white;
-		}
-		.container{
-			margin-top:60px;
-		}
-		input[type="text"]{
-			width:300px;
-			height:35px;
-		}
-		label{
-			font-size:20px;
-		}
-		h2{
-			margin:30px;
-		}
-		img{
-			height:100px;
-		}
-		.image{
-			text-align:center;
-		}
-		</style>
+		<link rel="stylesheet" href="style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
 	<section class="image">
@@ -62,8 +39,8 @@
 									echo "
 									
 									<label>Staff Name &nbsp;&nbsp;</label><input type='text' name='name' value=".$row['name']." disabled><br>
-									<label>Department&nbsp;</label><input type='text' name='dept' value=".$row['department']." disabled><br>
-									<label>Designation&nbsp;</label><input type='text' name='designation' value=".$row['designation']." disabled><br>
+									<label>Department&nbsp;&nbsp;</label><input type='text' name='dept' value=".$row['department']." disabled><br>
+									<label>Designation&nbsp;&nbsp;</label><input type='text' name='designation' value=".$row['designation']." disabled><br>
 									<a href='student.php' class='btn btn-success'> Next </a>	
 									
 									<script type='text/javascript'>
