@@ -2,16 +2,17 @@
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<style>
-		#sign{
-			text-align:center;
-			margin-top:60px;
-			margin-left:250px;
-			margin-right:250px;
-			color:white;
-			padding:20px;
+		.main{
 			background-color:#800080;
-			border:0px solid black;
-			border-radius:2px;
+			color:white;
+			padding: 30px;
+		}
+		.container{
+			margin-top:60px;
+		}
+		textarea{
+			height: 10vh;
+			width: 40vw;
 		}
 		img{
 			height:100px;
@@ -31,30 +32,41 @@
 		<section class="image">
 			<img src="logo.png">
 		</section>
-		<div id="sign">
-		<form method="POST">
-            <label >Grievances</label><br>
-			<input type="radio" name="yes" id="1" onchange="clicked()">Yes
-            <input type="radio" name="yes" id="2" onchange="clickedno()">No
 
-            <div style="display:none" id="div">
-				<br><label>Transport issue:</label>
-				<br>
-				<textarea name = "transport" placeholder = "Enter the transport issue" rows="3" cols="60"></textarea>
-				<br>
-				<label>Hostel issue:</label><br>
-				<textarea name = "hostel" placeholder = "Enter the hostel issue" rows="3" cols="60"></textarea>
-				<br>
-				<label>Canteen issue:</label><br>
-				<textarea name = "canteen" placeholder = "Enter the canteen issue" rows="3" cols="60"></textarea>
-				<br>
-				<label>Academic issue:</label><br>
-				<textarea name = "academic" placeholder = "Enter the academic issue" rows="3" cols="60"></textarea>
-            </div>
-			<br><label>Faculty remarks:</label><br><textarea name = "faculty" placeholder = "Enter the faculty remarks" rows="3" cols="60"></textarea>
-			<br><input type="submit" name="submit" value="submit" style="margin-top:20px" class="btn btn-success" >
-            
-		</form>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3"></div>
+				<div class="col-lg-6 main">
+					<span style="text-align:center"><h2> Grievances </h2></span>
+					<form method="POST">
+						<label >Grievances</label><br>
+						<input type="radio" name="yes" id="1" onchange="clicked()">Yes<br>
+						<input type="radio" name="yes" id="2" onchange="clickedno()">No
+
+						<div style="display:none" id="div">
+							<br><label>Transport issue:</label>
+							<br>
+							<textarea name = "transport" placeholder = "Enter the transport issue"></textarea>
+							<br>
+							<label>Hostel issue:</label><br>
+							<textarea name = "hostel" placeholder = "Enter the hostel issue"></textarea>
+							<br>
+							<label>Canteen issue:</label><br>
+							<textarea name = "canteen" placeholder = "Enter the canteen issue"></textarea>
+							<br>
+							<label>Academic issue:</label><br>
+							<textarea name = "academic" placeholder = "Enter the academic issue"></textarea>
+						</div>
+						<br><label>Faculty remarks:</label><br><textarea name = "faculty" placeholder = "Enter the faculty remarks"></textarea>
+						<br><input type="submit" name="submit" value="submit" style="margin-top:20px" class="btn btn-success" >
+						
+					</form>
+				</div>
+				<div class="col-lg-3"></div>
+			</div>
+		</div>
+		<div id="sign">
+		
         </div>
         <script>
             function clicked(){

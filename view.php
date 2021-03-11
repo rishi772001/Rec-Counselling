@@ -2,13 +2,12 @@
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<style>
-			
-
 			th{
 				font-weight:800;
 			}
-
-			
+			.container{
+				margin-top:30px;
+			}
 		</style>
 	</head>
 	<body>
@@ -16,13 +15,8 @@
 		session_start();
 		?>
 
-		<div class="container-fluid" style="margin: 5px;">
-		
-		</div>
-	
-
-		<div class="container-fluid">
-		<h2>Student Details</h2>
+		<div class="container">
+		<span style="text-align:center"><h2>Student Details</h2></span>
 		<table class="table table-bordered table-striped border-primary">
 			<tr>
 			<th>Register Number</th>			
