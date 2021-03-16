@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:33
--- Generation Time: Mar 04, 2021 at 10:01 AM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Host: 127.0.0.1
+-- Generation Time: Mar 10, 2021 at 04:08 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,12 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `grievances` (
   `registerno` int(11) NOT NULL,
-  `transport` varchar(1000) NOT NULL,
-  `hostel` varchar(1000) NOT NULL,
-  `canteen` varchar(1000) NOT NULL,
-  `remarks` varchar(1000) NOT NULL,
+  `transport` varchar(1000) DEFAULT NULL,
+  `hostel` varchar(1000) DEFAULT NULL,
+  `canteen` varchar(1000) DEFAULT NULL,
+  `remarks` varchar(1000) DEFAULT NULL,
   `issue` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `grievances`
+--
+
+INSERT INTO `grievances` (`registerno`, `transport`, `hostel`, `canteen`, `remarks`, `issue`) VALUES
+(181001060, 'Excelllent', 'Good', 'Super', 'Fine', 'Everything is Fine'),
+(181001074, 'Excellent', '', 'Excellent', '', 'All is Fine'),
+(181001098, 'Good', 'Ok', NULL, 'Good', 'Excellent');
 
 -- --------------------------------------------------------
 
@@ -78,7 +86,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`registerno`, `name`, `section`, `branch`, `phno`, `arrearcount`, `attendance`) VALUES
-(181001074, '\"Rishi Raj\"', 'B', 'IT', '9876543210', 1, '90');
+(181001060, 'Palaniappan M', 'B', 'IT', '9876544100', 2, '100'),
+(181001074, 'Rishiraj', 'B', 'IT', '9876543200', 0, '97'),
+(181001098, 'Sriram K', 'B', 'IT', '9876543211', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -101,6 +111,7 @@ ALTER TABLE `staff`
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
+  ADD PRIMARY KEY (`registerno`),
   ADD KEY `registerno` (`registerno`),
   ADD KEY `registerno_2` (`registerno`);
 COMMIT;
