@@ -4,7 +4,7 @@
 	// $pass="2lj8TN8HTQ";
 	// $db="epiz_26166502_rec";
 
-	$host="localhost:33";
+	$host="localhost";
 	$user="root";
 	$pass="";
 	$db="rec";
