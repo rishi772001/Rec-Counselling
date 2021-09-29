@@ -11,6 +11,7 @@ import db from "../Firebase";
 import {createTheme} from "@mui/material/styles";
 import Header from "../components/Header";
 import Grievances from "../components/Grievances";
+import Navbar from "../components/Navbar"
 
 const theme = createTheme();
 
@@ -83,6 +84,7 @@ class Students extends React.Component {
     render() {
         return (
             <>
+                {(localStorage.getItem("staff") === null && localStorage.getItem("admin") === null) && <Navbar />}
                 <Header/>
 
                 <Container component="main" maxWidth="md">
@@ -271,7 +273,7 @@ class Students extends React.Component {
                         </Box>
                     </Box>
                 </Container>
-                {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== undefined &&
+                {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== null &&
                     <Grievances dept={this.state.dept} rollNo={this.state.rollNo}/>
                 }
 

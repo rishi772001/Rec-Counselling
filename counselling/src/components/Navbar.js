@@ -16,10 +16,12 @@ export default function ButtonAppBar(props) {
                         General Counselling
                     </Typography>
 
+                    {localStorage.getItem("staff") === null && localStorage.getItem("admin") === null &&
+                        <Button variant={"danger"} onClick={() => window.location.replace("/staff")}>LogIn</Button>
+                    }
 
-                    <Button variant={"danger"} onClick={props.logout}>Log
-                        Out</Button>
-
+                    {(localStorage.getItem("staff") !== null || localStorage.getItem("admin") !== null )&&
+                    <Button variant={"danger"} onClick={props.logout}>LogOut</Button>}
 
                 </Toolbar>
             </AppBar>

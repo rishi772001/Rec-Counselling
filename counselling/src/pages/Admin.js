@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import db from "../Firebase"
-import {Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@mui/material";
+import {Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography} from "@mui/material";
 import Navbar from "../components/Navbar";
-
+import Button from "@mui/material/Button";
+import XLSX from 'xlsx';
 class Admin extends Component {
     constructor(props) {
         super(props);
@@ -10,25 +11,98 @@ class Admin extends Component {
     }
 
     componentDidMount() {
-        db.database().ref("/students").on("value", (snap) => {
-            if (snap.val() !== null) {
-                this.setState(snap.val())
-            }
-        })
+        this.fetch();
     }
 
     logout = () => {
         localStorage.clear();
+        window.location.replace("/staff")
+    }
+
+    fetch = () => {
+        const start = document.getElementById("startDate").value;
+        const end = document.getElementById("endDate").value;
+
+
+        if (start === "" || end === "") {
+            db.database().ref("/students").on("value", (snap) => {
+                let array = []
+                if (snap.val() !== null) {
+                    let data = snap.val();
+                    for (let i in data) {
+                        array.push(data[i])
+                    }
+                }
+                this.setState({"data": array}, () => console.log(this.state))
+            })
+        } else {
+            db.database().ref("/students").on("value", (snap) => {
+                let arr = []
+                if (snap.val() !== null) {
+                    let data = snap.val();
+                    for (let i in data) {
+
+                        let db = new Date(data[i]["grievances"]["date"]);
+                        let startDate = new Date(start);
+                        let endDate = new Date(end);
+                        endDate.setDate(endDate.getDate() + 1);
+
+                        if ((db > startDate) && (db < endDate)) {
+                            arr.push(data[i])
+                        }
+                    }
+                }
+
+                this.setState({"data": arr}, () => console.log(this.state))
+            })
+        }
+
+    }
+
+
+    export = () => {
+        let data = []
+        for(let i in this.state.data){
+            let temp = {
+                "Roll No" : this.state.data[i].rollNo,
+                "Department" : this.state.data[i].dept,
+                "Name" : this.state.data[i]["name"],
+                "Date" : this.state.data[i]["grievances"]["date"],
+                "Hostel Issues" : this.state.data[i]["grievances"]["hostelIssues"],
+                "Canteen Issues" : this.state.data[i]["grievances"]["canteenIssues"],
+                "Transport Issues" : this.state.data[i]["grievances"]["transportIssues"],
+                "Academic Issues" : this.state.data[i]["grievances"]["academicIssues"],
+                "Other Issues" : this.state.data[i]["grievances"]["otherIssues"],
+                "Faculty remarks" : this.state.data[i]["grievances"]["facultyRemarks"],
+            }
+            console.log(temp)
+            data.push(temp)
+        }
+        const workSheet = XLSX.utils.json_to_sheet(data);
+        const workBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Counselling")
+        let buf = XLSX.write(workBook, {bookType: "xlsx", type: "buffer"})
+        XLSX.write(workBook, {bookType: "xlsx", type: "binary"})
+        XLSX.writeFile(workBook, "counselling.xlsx");
     }
 
     render() {
-        if (localStorage.getItem("admin") === undefined) {
+        if (localStorage.getItem("admin") === null) {
             window.location.replace("/staff");
         }
         return (
-            <div >
-                <Navbar logout = {this.logout}/>
-                <Typography style={{textAlign: 'center', fontSize: "32px", fontWeight: "600"}}>COUNSELLING DETAILS</Typography>
+            <div>
+                <Navbar logout={this.logout}/>
+                <Typography style={{textAlign: 'center', fontSize: "32px", fontWeight: "600"}}>COUNSELLING
+                    DETAILS</Typography>
+
+                <div style={{margin: "30px"}}>
+                    Start Date: <TextField type={"date"} id={"startDate"}/> &nbsp;
+                    End Date: <TextField type={"date"} id={"endDate"}/> &nbsp;
+                    <Button onClick={this.fetch} variant={"contained"} color={"primary"}>Fetch</Button> &nbsp;
+                    <Button onClick={this.export} variant={"contained"} color={"secondary"}>Export</Button>
+                </div>
+
                 <Table style={{marginTop: "40px"}}>
                     <TableHead>
                         <TableCell>
@@ -64,36 +138,37 @@ class Admin extends Component {
 
                     </TableHead>
                     <TableBody>
-                        {Object.keys(this.state).map((val, index) =>
+                        {this.state && this.state.data && Object.keys(this.state.data).map((val, index) =>
                             <>
+                                {this.state["data"][val]["grievances"] !== undefined &&
                                 <TableRow>
                                     <TableCell>
-                                        {this.state[val].rollNo}
+                                        {this.state["data"][val].rollNo}
                                     </TableCell>
                                     <TableCell>
-                                        {this.state[val].name}
+                                        {this.state["data"][val].name}
                                     </TableCell>
                                     <TableCell>
-                                        {this.state[val].dept}
+                                        {this.state["data"][val].dept}
                                     </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["date"]}
+                                        {this.state["data"][val]["grievances"]["date"]}
                                     </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["hostelIssues"]}
+                                        {this.state["data"][val]["grievances"]["hostelIssues"]}
                                     </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["academicIssues"]}
+                                        {this.state["data"][val]["grievances"]["academicIssues"]}
                                     </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["canteenIssues"]}                                    </TableCell>
+                                        {this.state["data"][val]["grievances"]["canteenIssues"]}                                    </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["transportIssues"]}                                    </TableCell>
+                                        {this.state["data"][val]["grievances"]["transportIssues"]}                                    </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["otherIssues"]}                                    </TableCell>
+                                        {this.state["data"][val]["grievances"]["otherIssues"]}                                    </TableCell>
                                     <TableCell>
-                                        {this.state[val]["grievances"]["facultyRemarks"]}                                    </TableCell>
-                                </TableRow>
+                                        {this.state["data"][val]["grievances"]["facultyRemarks"]}                                    </TableCell>
+                                </TableRow>}
                             </>)
 
                         }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Student from "./Student";
 import Login from "../components/Login";
-import {Button} from "react-bootstrap";
 import Navbar from "../components/Navbar"
 
 class Staff extends Component {
@@ -13,13 +12,13 @@ class Staff extends Component {
     }
 
     componentDidMount() {
-        if(localStorage.getItem("staff") !== undefined){
+        if(localStorage.getItem("staff") !== null){
             this.setState({"isLoggedIn": true})
         }
     }
 
     logout = () => {
-        this.setState({"isLoggedIn": false})
+        this.setState({"isLoggedIn": false}, () => localStorage.clear())
     }
 
     change = (val) => {
@@ -34,13 +33,18 @@ class Staff extends Component {
             <div>
 
                 {this.state.isLoggedIn &&
-                <>
+                <div>
                     <Navbar logout = {this.logout} />
-
                     <Student change={this.change}/>
+                </div>
+                }
 
-                </>}
-            {!this.state.isLoggedIn && <Login change={this.change}/> }
+                {!this.state.isLoggedIn &&
+                <div>
+                    <Navbar logout = {this.logout} />
+                    <Login change={this.change}/>
+                </div>
+                }
 
             </div>
         );

@@ -27,15 +27,17 @@ class Login extends Component {
         }
     }
 
-    handleSubmit = () => {
-        if(this.state.userName === "admin" && this.state.password === "admin"){
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state)
+        if(this.state.username === "admin" && this.state.password === "admin"){
             localStorage.setItem("admin", "true");
             window.location.replace("/admin")
         }
     }
 
     handleChange = (e) => {
-        this.setState({[e.target.name] : e.target.name})
+        this.setState({[e.target.name] : e.target.value})
     }
 
     render() {
@@ -77,6 +79,7 @@ class Login extends Component {
                                         fullWidth
                                         id="password"
                                         label="Password"
+                                        type={"password"}
                                         name="password"
                                         onChange={this.handleChange}
                                     />
