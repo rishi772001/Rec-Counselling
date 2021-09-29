@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import db from "../Firebase";
-import Header from "./Header";
+
 class Grievances extends Component {
     constructor(props) {
         super(props);
