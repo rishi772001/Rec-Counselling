@@ -81,10 +81,15 @@ class Students extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
+    logout = () => {
+        localStorage.clear();
+        window.location.replace("/staff")
+    }
+
     render() {
         return (
             <>
-                {(localStorage.getItem("staff") === null && localStorage.getItem("admin") === null) && <Navbar />}
+                {localStorage.getItem("staff") === null && <Navbar logout={this.logout} />}
                 <Header/>
 
                 <Container component="main" maxWidth="md">

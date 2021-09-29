@@ -16,13 +16,12 @@ class Login extends Component {
 
     responseGoogle = (response) => {
         if (response.type !== "error") {
-            if (response.profileObj === undefined || (response.profileObj.email.split(".").length) > 7) {
-                alert("Login failed");
-                window.location.replace("/")
+            if (response.error !== undefined || (response.profileObj.email.split(".").length) > 3) {
+                alert("Login failed, Please enable cookies and try again");
+                console.log(response)
             } else {
                 localStorage.setItem("staff", response.profileObj.email);
                 this.props.change(true);
-
             }
         }
     }
