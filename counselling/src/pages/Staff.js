@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Student from "./Student";
 import Login from "../components/Login";
-import {Button} from "react-bootstrap";
 import Navbar from "../components/Navbar"
 
 class Staff extends Component {

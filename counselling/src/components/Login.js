@@ -28,14 +28,14 @@ class Login extends Component {
     }
 
     handleSubmit = () => {
-        if(this.state.userName === "admin" && this.state.password === "admin"){
+        if (this.state.userName === "admin" && this.state.password === "admin") {
             localStorage.setItem("admin", "true");
             window.location.replace("/admin")
         }
     }
 
     handleChange = (e) => {
-        this.setState({[e.target.name] : e.target.name})
+        this.setState({[e.target.name]: e.target.name})
     }
 
     render() {

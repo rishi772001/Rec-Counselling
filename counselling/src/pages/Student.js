@@ -271,7 +271,10 @@ class Students extends React.Component {
                         </Box>
                     </Box>
                 </Container>
-                {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== undefined &&
+                {
+                    this.state.rollNo !== "" &&
+                    this.state.dept !== "" &&
+                    localStorage.getItem("staff") === true &&
                     <Grievances dept={this.state.dept} rollNo={this.state.rollNo}/>
                 }
 

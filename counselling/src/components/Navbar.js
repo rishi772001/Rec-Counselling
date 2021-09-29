@@ -12,7 +12,8 @@ export default function ButtonAppBar(props) {
             <AppBar position="static">
                 <Toolbar>
 
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}} onClick={() => window.location.replace("/")}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}
+                                onClick={() => window.location.replace("/")}>
                         General Counselling
                     </Typography>
 

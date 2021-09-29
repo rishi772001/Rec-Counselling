@@ -26,9 +26,10 @@ class Admin extends Component {
             window.location.replace("/staff");
         }
         return (
-            <div >
-                <Navbar logout = {this.logout}/>
-                <Typography style={{textAlign: 'center', fontSize: "32px", fontWeight: "600"}}>COUNSELLING DETAILS</Typography>
+            <div>
+                <Navbar logout={this.logout}/>
+                <Typography style={{textAlign: 'center', fontSize: "32px", fontWeight: "600"}}>COUNSELLING
+                    DETAILS</Typography>
                 <Table style={{marginTop: "40px"}}>
                     <TableHead>
                         <TableCell>
