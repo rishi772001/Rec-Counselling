@@ -11,16 +11,44 @@ import db from "../Firebase";
 class Grievances extends Component {
     constructor(props) {
         super(props);
-        this.state = {"show": true, date: new Date().toLocaleString(), department: this.props.dept}
+        this.state = {
+            "show": true, date: new Date().toLocaleString(), department: this.props.dept,
+            "hostelIssues": "", "transportIssues": "", "canteenIssues": "", "academicIssues": "",
+            "otherIssues": "", "facultyRemarks": "", "generalIssues": "Doing Well, Encouraged to do well"
+        }
     }
 
     handleChangeMain = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({[e.target.name]: e.target.value}, () => {
+            if (this.check()) {
+                alert("Words limit exceeded, Maximum words is 50")
+            }
+        })
+    }
+
+    check = () => {
+        return this.state.hostelIssues.split(" ").length > 50 || this.state.transportIssues.split(" ").length > 50 ||
+            this.state.transportIssues.split(" ").length > 50 || this.state.canteenIssues.split(" ").length > 50 ||
+            this.state.academicIssues.split(" ").length > 50 || this.state.otherIssues.split(" ").length > 50;
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        const val = this.state;
-        delete val.show;
+        const val = {
+            "hostelIssues": this.state.hostelIssues,
+            "transportIssues": this.state.transportIssues,
+            "canteenIssues": this.state.canteenIssues,
+            "academicIssues": this.state.academicIssues,
+            "otherIssues": this.state.otherIssues,
+            "facultyRemarks": this.state.facultyRemarks,
+            "date": this.state.date,
+            "department": this.state.department,
+            "generalIssues": this.state.generalIssues
+        };
+        if (this.check()
+        ) {
+            alert("Words limit exceeded, please try again!")
+            return;
+        }
         db.database().ref(`/students/${this.props.rollNo}/grievances`).set(val).then(() => {
                 alert("Thank you, Successfully submitted");
                 window.location.reload();
@@ -32,7 +60,7 @@ class Grievances extends Component {
         return (
             <div>
 
-                <Container component="main" maxWidth="md">
+                <Container component="main">
                     <CssBaseline/>
                     <Box
                         sx={{
@@ -47,14 +75,38 @@ class Grievances extends Component {
                         </Typography>
                         <Box
                             component="form"
-                            onSubmit={this.handleSubmit}
                             sx={{mt: 3}}
                         >
                             <Grid container spacing={2}>
                                 {this.state.show &&
                                 <>
                                     <Grid item xs={12}>
-                                        <TextField
+                                        <div className={"radio-div"}>
+                                            Hostel Issues <br/>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name={"showHostelIssues"}
+                                                    value="yes"
+                                                    checked={this.state.showHostelIssues === "yes"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                Yes
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="no"
+                                                    name={"showHostelIssues"}
+                                                    checked={this.state.showHostelIssues === "no"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                No
+                                            </label>
+                                        </div>
+
+                                        {this.state.showHostelIssues === "yes" && <TextField
                                             autoComplete="Hostel Issues"
                                             name="hostelIssues"
                                             required
@@ -64,21 +116,70 @@ class Grievances extends Component {
                                             label="Hostel Issues"
                                             autoFocus
                                             onChange={this.handleChangeMain}
-                                        />
+                                        />}
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <TextField
+                                        <div className={"radio-div"}>
+                                            Transport Issues <br/>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name={"showTransportIssues"}
+                                                    value="yes"
+                                                    checked={this.state.showTransportIssues === "yes"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                Yes
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="no"
+                                                    name={"showTransportIssues"}
+                                                    checked={this.state.showTransportIssues === "no"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                No
+                                            </label>
+                                        </div>
+                                        {this.state.showTransportIssues === "yes" && <TextField
                                             required
                                             fullWidth
                                             id="transportIssues"
-                                            label="Transport Isssues"
+                                            label="Transport Issues"
                                             defaultValue={this.state.transportIssue}
                                             name="transportIssues"
                                             autoComplete="Transport Issues"
                                             onChange={this.handleChangeMain}
-                                        />
+                                        />}
                                     </Grid>
                                     <Grid item xs={12}>
+                                        <div className={"radio-div"}>
+                                            Canteen Issues <br/>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="yes"
+                                                    name={"showCanteenIssues"}
+                                                    checked={this.state.showCanteenIssues === "yes"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                Yes
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="no"
+                                                    name={"showCanteenIssues"}
+                                                    checked={this.state.showCanteenIssues === "no"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                No
+                                            </label>
+                                        </div>
+                                        {this.state.showCanteenIssues === "yes" &&
                                         <TextField
                                             required
                                             fullWidth
@@ -88,23 +189,91 @@ class Grievances extends Component {
                                             name="canteenIssues"
                                             autoComplete="Canteen Issues"
                                             onChange={this.handleChangeMain}
-                                        />
+                                        />}
                                     </Grid>
                                     <Grid item xs={12}>
+                                        <div className={"radio-div"}>
+                                            Academic Issues <br/>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="yes"
+                                                    name={"showAcademicIssues"}
+                                                    checked={this.state.showAcademicIssues === "yes"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                Yes
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="no"
+                                                    name={"showAcademicIssues"}
+                                                    checked={this.state.showAcademicIssues === "no"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                No
+                                            </label>
+                                        </div>
+                                        {this.state.showAcademicIssues === "yes" &&
                                         <TextField
                                             required
                                             fullWidth
                                             name="academicIssues"
                                             label="Academic Issues"
-                                            defaultValue={this.state.handleIssue}
+                                            defaultValue={this.state.academicIssues}
                                             type="text"
                                             id="sem"
                                             autoComplete="Academic Issues"
                                             onChange={this.handleChangeMain}
-                                        />
+                                        />}
                                     </Grid>
 
                                     <Grid item xs={12}>
+                                        <div className={"radio-div"}>
+                                            <label>
+                                                General Issues: <br/>
+                                            </label>
+                                        </div>
+                                        <select className={"select"} defaultValue={this.state.generalIssues}
+                                                name="generalIssues" onChange={this.handleChangeMain}>
+                                            <option className={"option"} value="Doing Well, Encouraged to do well">Doing
+                                                Well, Encouraged to do well
+                                            </option>
+                                            <option className={"option"}
+                                                    value="Student is not performing well, advised to concentrate more">Student
+                                                is not performing well, advised to concentrate more
+                                            </option>
+                                        </select>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <div className={"radio-div"}>
+                                            Other Issues <br/>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="yes"
+                                                    name={"showOtherIssues"}
+                                                    checked={this.state.showOtherIssues === "yes"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                Yes
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    value="no"
+                                                    name={"showOtherIssues"}
+                                                    checked={this.state.showOtherIssues === "no"}
+                                                    onChange={this.handleChangeMain}
+                                                />&nbsp;
+                                                No
+                                            </label>
+                                        </div>
+                                        {this.state.showOtherIssues === "yes" &&
                                         <TextField
                                             required
                                             fullWidth
@@ -115,7 +284,7 @@ class Grievances extends Component {
                                             id="otherIssues"
                                             autoComplete="Other Issue"
                                             onChange={this.handleChangeMain}
-                                        />
+                                        />}
                                     </Grid>
                                 </>
                                 }
@@ -136,6 +305,7 @@ class Grievances extends Component {
                             <Button
                                 type="submit"
                                 fullWidth
+                                onClick={this.handleSubmit}
                                 variant="contained"
                                 sx={{mt: 3, mb: 2}}
                             >

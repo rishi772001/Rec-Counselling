@@ -2,7 +2,6 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import {Button as Btn} from "react-bootstrap";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -19,6 +18,7 @@ class Students extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            staffId: localStorage.getItem("staff"),
             rollNo: "",
             name: "",
             dept: "",
@@ -56,7 +56,7 @@ class Students extends React.Component {
     handleRemoveFields = (index) => {
         const inputs = this.state.inputs;
         inputs.splice(index, 1);
-        this.setState(inputs);
+        this.setState({inputs: inputs});
     };
 
     handleAddFields = () => {
@@ -89,14 +89,13 @@ class Students extends React.Component {
     render() {
         return (
             <>
-                {localStorage.getItem("staff") === null && <Navbar logout={this.logout} />}
+                <Navbar logout={this.logout} />
                 <Header/>
 
                 <Container component="main" maxWidth="md">
                     <CssBaseline/>
                     <Box
                         sx={{
-                            marginTop: 8,
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
@@ -200,7 +199,7 @@ class Students extends React.Component {
                                 <Grid item xs={12}>
                                     {this.state &&
                                     Object.keys(this.state.inputs).map((input, index) => (
-                                        <>
+                                        <Box key={index}>
                                             <Grid container spacing={2}>
                                                 <Grid item md={2}>
                                                     <TextField
@@ -251,17 +250,19 @@ class Students extends React.Component {
                                                     />
                                                 </Grid>
                                                 <Grid item md={1}>
-                                                    <Btn
-                                                        variant="danger"
+                                                    <Button
+                                                        variant="contained"
+                                                        size={"small"}
+                                                        color="error"
                                                         onClick={(e) => this.handleRemoveFields(index)}
                                                     >
-                                                        -
-                                                    </Btn>
+                                                        &#8722;
+                                                    </Button>
                                                 </Grid>
 
                                             </Grid>
                                             <br/>
-                                        </>
+                                        </Box>
                                     ))}
                                     <Button onClick={this.handleAddFields} color="secondary"
                                             variant="contained">Add Subject</Button>
@@ -275,12 +276,17 @@ class Students extends React.Component {
                             >
                                 Submit
                             </Button>
+                            <Box>
+                            {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== null &&
+                                <Grievances
+                                    dept={this.state.dept} rollNo={this.state.rollNo}
+                                />
+                            }
+                            </Box>
                         </Box>
                     </Box>
                 </Container>
-                {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== null &&
-                    <Grievances dept={this.state.dept} rollNo={this.state.rollNo}/>
-                }
+
 
             </>
         );

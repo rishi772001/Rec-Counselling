@@ -16,7 +16,7 @@ class Login extends Component {
 
     responseGoogle = (response) => {
         if (response.type !== "error") {
-            if (response.error !== undefined || (response.profileObj.email.split(".").length) > 3) {
+            if (response.error !== undefined || (response.profileObj.email.split(".").length) > 4) {
                 alert("Login failed, Please enable cookies and try again");
                 console.log(response)
             } else {

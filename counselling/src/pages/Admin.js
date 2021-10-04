@@ -31,25 +31,32 @@ class Admin extends Component {
                 if (snap.val() !== null) {
                     let data = snap.val();
                     for (let i in data) {
-                        array.push(data[i])
+                        if(data[i]["grievances"] !== undefined) {
+                            array.push(data[i])
+                        }
                     }
                 }
                 this.setState({"data": array}, () => console.log(this.state))
             })
         } else {
+            let startDate = new Date(start);
+            let endDate = new Date(end);
+            if(endDate < startDate){
+                alert("Start Date cannot be high than End Date");
+                return;
+            }
             db.database().ref("/students").on("value", (snap) => {
                 let arr = []
                 if (snap.val() !== null) {
                     let data = snap.val();
                     for (let i in data) {
+                        if(data[i]["grievances"] !== undefined) {
+                            let db = new Date(data[i]["grievances"]["date"]);
+                            endDate.setDate(endDate.getDate() + 1);
 
-                        let db = new Date(data[i]["grievances"]["date"]);
-                        let startDate = new Date(start);
-                        let endDate = new Date(end);
-                        endDate.setDate(endDate.getDate() + 1);
-
-                        if ((db > startDate) && (db < endDate)) {
-                            arr.push(data[i])
+                            if ((db > startDate) && (db < endDate)) {
+                                arr.push(data[i])
+                            }
                         }
                     }
                 }
@@ -68,6 +75,7 @@ class Admin extends Component {
                 "Roll No" : this.state.data[i].rollNo,
                 "Department" : this.state.data[i].dept,
                 "Name" : this.state.data[i]["name"],
+                "Year" : this.state.data[i]["year"],
                 "Date" : this.state.data[i]["grievances"]["date"],
                 "Hostel Issues" : this.state.data[i]["grievances"]["hostelIssues"],
                 "Canteen Issues" : this.state.data[i]["grievances"]["canteenIssues"],
@@ -92,23 +100,21 @@ class Admin extends Component {
             window.location.replace("/staff");
         }
         return (
-            <div>
+            <>
                 <Navbar logout={this.logout}/>
                 <Typography style={{textAlign: 'center', fontSize: "32px", fontWeight: "600"}}>COUNSELLING
                     DETAILS</Typography>
 
                 <div style={{margin: "30px"}}>
                     <Grid container spacing={2}>
-                        <Grid item sm={3}>
+                        <Grid item xl={3}>
                             Start Date: <TextField type={"date"} id={"startDate"}/> &nbsp;
                         </Grid>
-                        <Grid item sm={3}>
+                        <Grid item xl={3}>
                             End Date: <TextField type={"date"} id={"endDate"}/> &nbsp;
                         </Grid>
-                        <Grid item sm={1}>
+                        <Grid item xl={1}>
                             <Button onClick={this.fetch} variant={"contained"} color={"primary"}>Fetch</Button> &nbsp;
-                        </Grid>
-                        <Grid item sm={3}>
                             <Button onClick={this.export} variant={"contained"} color={"secondary"}>Export</Button>
                         </Grid>
                     </Grid>
@@ -124,6 +130,9 @@ class Admin extends Component {
                         </TableCell>
                         <TableCell>
                             Department
+                        </TableCell>
+                        <TableCell>
+                            Year
                         </TableCell>
                         <TableCell>
                             Date of Counselling
@@ -163,6 +172,9 @@ class Admin extends Component {
                                         {this.state["data"][val].dept}
                                     </TableCell>
                                     <TableCell>
+                                        {this.state["data"][val].year}
+                                    </TableCell>
+                                    <TableCell>
                                         {this.state["data"][val]["grievances"]["date"]}
                                     </TableCell>
                                     <TableCell>
@@ -186,7 +198,7 @@ class Admin extends Component {
 
                     </TableBody>
                 </Table>
-            </div>
+            </>
         );
     }
 }

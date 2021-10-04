@@ -34,14 +34,13 @@ class Staff extends Component {
 
                 {this.state.isLoggedIn &&
                 <div>
-                    <Navbar logout = {this.logout} />
                     <Student change={this.change}/>
                 </div>
                 }
 
                 {!this.state.isLoggedIn &&
                 <div>
-                    <Navbar logout = {this.logout} />
+                    <Navbar  />
                     <Login change={this.change}/>
                 </div>
                 }
