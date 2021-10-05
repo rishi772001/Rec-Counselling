@@ -68,14 +68,14 @@ class Grievances extends Component {
                     <CssBaseline/>
                     <Box
                         sx={{
-                            marginTop: 8,
+                            marginTop: 3,
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
                         }}
                     >
                         <Typography component="h1" variant="h5">
-                            Grievances
+                            <h3>Grievances</h3>
                         </Typography>
                         <Box
                             sx={{mt: 3}}

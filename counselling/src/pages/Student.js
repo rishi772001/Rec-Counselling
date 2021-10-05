@@ -7,12 +7,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import db from "../Firebase";
-import {createTheme} from "@mui/material/styles";
 import Header from "../components/Header";
 import Grievances from "../components/Grievances";
 import Navbar from "../components/Navbar"
-
-const theme = createTheme();
 
 class Students extends React.Component {
     constructor(props) {
@@ -342,7 +339,7 @@ class Students extends React.Component {
                                                         variant="contained"
                                                         size={"small"}
                                                         color="error"
-                                                        onClick={(e) => this.handleRemoveFields(index)}
+                                                        onClick={() => this.handleRemoveFields(index)}
                                                     >
                                                         &#8722;
                                                     </Button>
@@ -366,9 +363,12 @@ class Students extends React.Component {
                             </Button>
                             <Box>
                                 {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== null &&
-                                <Grievances
-                                    dept={this.state.dept} rollNo={this.state.rollNo}
-                                />
+                                <>
+                                    <hr />
+                                    <Grievances
+                                        dept={this.state.dept} rollNo={this.state.rollNo}
+                                    />
+                                </>
                                 }
                             </Box>
                         </Box>
