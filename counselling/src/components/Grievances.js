@@ -31,6 +31,10 @@ class Grievances extends Component {
             this.state.transportIssues.split(" ").length > 50 || this.state.canteenIssues.split(" ").length > 50 ||
             this.state.academicIssues.split(" ").length > 50 || this.state.otherIssues.split(" ").length > 50;
     }
+
+    clearText = (name) => {
+        this.setState({ [name]: ""});
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         const val = {
@@ -74,7 +78,6 @@ class Grievances extends Component {
                             Grievances
                         </Typography>
                         <Box
-                            component="form"
                             sx={{mt: 3}}
                         >
                             <Grid container spacing={2}>
@@ -100,7 +103,7 @@ class Grievances extends Component {
                                                     value="no"
                                                     name={"showHostelIssues"}
                                                     checked={this.state.showHostelIssues === "no"}
-                                                    onChange={this.handleChangeMain}
+                                                    onChange={(e) => {this.handleChangeMain(e); this.clearText("hostelIssues")}}
                                                 />&nbsp;
                                                 No
                                             </label>
@@ -138,7 +141,7 @@ class Grievances extends Component {
                                                     value="no"
                                                     name={"showTransportIssues"}
                                                     checked={this.state.showTransportIssues === "no"}
-                                                    onChange={this.handleChangeMain}
+                                                    onChange={(e) => {this.handleChangeMain(e); this.clearText("transportIssues")}}
                                                 />&nbsp;
                                                 No
                                             </label>
@@ -148,7 +151,7 @@ class Grievances extends Component {
                                             fullWidth
                                             id="transportIssues"
                                             label="Transport Issues"
-                                            defaultValue={this.state.transportIssue}
+                                            defaultValue={this.state.transportIssues}
                                             name="transportIssues"
                                             autoComplete="Transport Issues"
                                             onChange={this.handleChangeMain}
@@ -174,7 +177,7 @@ class Grievances extends Component {
                                                     value="no"
                                                     name={"showCanteenIssues"}
                                                     checked={this.state.showCanteenIssues === "no"}
-                                                    onChange={this.handleChangeMain}
+                                                    onChange={(e) => {this.handleChangeMain(e); this.clearText("canteenIssues")}}
                                                 />&nbsp;
                                                 No
                                             </label>
@@ -210,8 +213,7 @@ class Grievances extends Component {
                                                     type="radio"
                                                     value="no"
                                                     name={"showAcademicIssues"}
-                                                    checked={this.state.showAcademicIssues === "no"}
-                                                    onChange={this.handleChangeMain}
+                                                    onChange={(e) => {this.handleChangeMain(e); this.clearText("academicIssues")}}
                                                 />&nbsp;
                                                 No
                                             </label>
@@ -268,7 +270,7 @@ class Grievances extends Component {
                                                     value="no"
                                                     name={"showOtherIssues"}
                                                     checked={this.state.showOtherIssues === "no"}
-                                                    onChange={this.handleChangeMain}
+                                                    onChange={(e) => {this.handleChangeMain(e); this.clearText("otherIssues")}}
                                                 />&nbsp;
                                                 No
                                             </label>
@@ -303,7 +305,6 @@ class Grievances extends Component {
                                 </Grid>
                             </Grid>
                             <Button
-                                type="submit"
                                 fullWidth
                                 onClick={this.handleSubmit}
                                 variant="contained"

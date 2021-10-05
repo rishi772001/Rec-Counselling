@@ -89,7 +89,7 @@ class Students extends React.Component {
     render() {
         return (
             <>
-                <Navbar logout={this.logout} />
+                <Navbar logout={this.logout}/>
                 <Header/>
 
                 <Container component="main" maxWidth="md">
@@ -138,39 +138,127 @@ class Students extends React.Component {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="year"
-                                        label="Year"
-                                        value={this.state.year}
-                                        name="year"
-                                        onChange={this.handleChangeMain}
-                                    />
+                                    <div className={"radio-div"}>
+                                        <label>
+                                            Year: <br/>
+                                        </label>
+                                    </div>
+                                    <select className={"select"} defaultValue={this.state.year}
+                                            name="year" onChange={this.handleChangeMain}>
+                                        <option className={"option"} value="1">1
+                                        </option>
+                                        <option className={"option"}
+                                                value="2">2
+                                        </option>
+                                        <option className={"option"}
+                                                value="3">3
+                                        </option>
+                                        <option className={"option"}
+                                                value="4">4
+                                        </option>
+                                    </select>
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <div className={"radio-div"}>
+                                        <label>
+                                            Semester: <br/>
+                                        </label>
+                                    </div>
+                                    <select className={"select"} defaultValue={this.state.sem}
+                                            name="sem" onChange={this.handleChangeMain}>
+                                        <option className={"option"} value="1">1
+                                        </option>
+                                        <option className={"option"}
+                                                value="2">2
+                                        </option>
+                                        <option className={"option"}
+                                                value="3">3
+                                        </option>
+                                        <option className={"option"}
+                                                value="4">4
+                                        </option>
+                                        <option className={"option"} value="5">5
+                                        </option>
+                                        <option className={"option"}
+                                                value="6">6
+                                        </option>
+                                        <option className={"option"}
+                                                value="7">7
+                                        </option>
+                                        <option className={"option"}
+                                                value="8">8
+                                        </option>
+                                    </select>
+
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        name="sem"
-                                        label="Semester"
-                                        value={this.state.sem}
-                                        type="text"
-                                        id="sem"
-                                        onChange={this.handleChangeMain}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        name="dept"
-                                        label="Department"
-                                        value={this.state.dept}
-                                        type="text"
-                                        id="dept"
-                                        onChange={this.handleChangeMain}
-                                    />
+                                    <div className={"radio-div"}>
+                                        <label>
+                                            Department: <br/>
+                                        </label>
+                                    </div>
+
+                                    <select className={"select"} defaultValue={this.state.dept}
+                                            name="dept" onChange={this.handleChangeMain}>
+
+                                        <option className={"option"}
+                                                value="Aeronautical Engineering">Aeronautical Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Artificial Intelligence & Machine Learning">Artificial
+                                            Intelligence &amp; Machine Learning
+                                        </option>
+                                        <option className={"option"}
+                                                value="Automobile Engineering">Automobile Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Biomedical Engineering">Biomedical Engineering
+                                        </option>
+                                        <option className={"option"} value="Biotechnology">Biotechnology
+                                        </option>
+                                        <option className={"option"}
+                                                value="Chemical Engineering">Chemical Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Civil Engineering">Civil Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Computer Science & Business System">Computer
+                                            Science &amp; Business System
+                                        </option>
+                                        <option className={"option"} value="Computer Science & Design">Computer
+                                            Science &amp; Design
+                                        </option>
+                                        <option className={"option"}
+                                                value="Computer Science & Engineering">Computer
+                                            Science &amp; Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Electrical & Electronics Engineering">Electrical &amp; Electronics
+                                            Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Electronics & Communication Engineering">Electronics &amp; Communication
+                                            Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Food Technology">Food Technology
+                                        </option>
+                                        <option className={"option"}
+                                                value="Information Technology">Information Technology
+                                        </option>
+                                        <option className={"option"}
+                                                value="Mechanical Engineering">Mechanical Engineering
+                                        </option>
+                                        <option className={"option"}
+                                                value="Mechatronics">Mechatronics
+                                        </option>
+                                        <option className={"option"}
+                                                value="Robotics and Automation">Robotics and Automation
+                                        </option>
+                                    </select>
+
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
@@ -277,11 +365,11 @@ class Students extends React.Component {
                                 Submit
                             </Button>
                             <Box>
-                            {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== null &&
+                                {this.state.rollNo !== "" && this.state.dept !== "" && localStorage.getItem("staff") !== null &&
                                 <Grievances
                                     dept={this.state.dept} rollNo={this.state.rollNo}
                                 />
-                            }
+                                }
                             </Box>
                         </Box>
                     </Box>

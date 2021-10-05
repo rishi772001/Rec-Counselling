@@ -28,7 +28,6 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
         if(this.state.username === "admin" && this.state.password === "admin"){
             localStorage.setItem("admin", "true");
             window.location.replace("/admin")
