@@ -20,6 +20,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-spreadsheet": "^0.6.0",
+    "simple-excel-to-json": "^2.3.0",
     "web-vitals": "^1.1.2",
     "xlsx": "^0.17.2"
   },

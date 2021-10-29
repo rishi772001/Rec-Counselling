@@ -30,7 +30,7 @@ class Students extends React.Component {
     fetchStudentDetails = () => {
         db.database().ref(`/students/${this.state.rollNo}`).once("value", (snap) => {
             if (snap.val() != null) {
-                this.setState(snap.val())
+                this.setState(snap.val(), () => console.log(this.state))
             }
         })
     }
@@ -142,6 +142,8 @@ class Students extends React.Component {
                                     </div>
                                     <select className={"select"} value={this.state.year}
                                             name="year" onChange={this.handleChangeMain}>
+                                        <option className={"option"} value="">Select
+                                        </option>
                                         <option className={"option"} value="1">1
                                         </option>
                                         <option className={"option"}
@@ -164,6 +166,8 @@ class Students extends React.Component {
                                     </div>
                                     <select className={"select"} value={this.state.sem}
                                             name="sem" onChange={this.handleChangeMain}>
+                                        <option className={"option"} value="">Select
+                                        </option>
                                         <option className={"option"} value="1">1
                                         </option>
                                         <option className={"option"}
@@ -198,7 +202,8 @@ class Students extends React.Component {
 
                                     <select className={"select"} value={this.state.dept}
                                             name="dept" onChange={this.handleChangeMain}>
-
+                                        <option className={"option"} value="">Select
+                                        </option>
                                         <option className={"option"}
                                                 value="Aeronautical Engineering">Aeronautical Engineering
                                         </option>
@@ -262,7 +267,7 @@ class Students extends React.Component {
                                         required
                                         fullWidth
                                         name="cgpa"
-                                        label="CGPA(Sem 1/ Sem 2/ Sem 3)"
+                                        label="CGPA(Sem 1/ Sem 3/ Sem 5)"
                                         value={this.state.cgpa}
                                         type="text"
                                         id="cgpa"
@@ -282,6 +287,8 @@ class Students extends React.Component {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <h3>Student Academic Details</h3>
+                                    <br />
                                     {this.state &&
                                     Object.keys(this.state.inputs).map((input, index) => (
                                         <Box key={index}>

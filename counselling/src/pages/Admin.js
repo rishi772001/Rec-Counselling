@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Button from "@mui/material/Button";
 import XLSX from 'xlsx';
 import Grid from "@mui/material/Grid";
+import Import from "../components/Import";
 class Admin extends Component {
     constructor(props) {
         super(props);
@@ -106,16 +107,17 @@ class Admin extends Component {
                     DETAILS</Typography>
 
                 <div style={{margin: "30px"}}>
-                    <Grid container spacing={2}>
-                        <Grid item xl={3}>
+                    <Grid container spacing={1}>
+                        <Grid item xl>
                             Start Date: <TextField type={"date"} id={"startDate"}/> &nbsp;
                         </Grid>
-                        <Grid item xl={3}>
+                        <Grid item xl>
                             End Date: <TextField type={"date"} id={"endDate"}/> &nbsp;
                         </Grid>
-                        <Grid item xl={1}>
-                            <Button onClick={this.fetch} variant={"contained"} color={"primary"}>Fetch</Button> &nbsp;
-                            <Button onClick={this.export} variant={"contained"} color={"secondary"}>Export</Button>
+                        <Grid item xl>
+                            <Button onClick={this.fetch} size={"small"} variant={"contained"} color={"primary"}>Fetch</Button> &nbsp;
+                            <Button onClick={this.export}size={"small"} variant={"contained"} color={"secondary"}>Export</Button> &nbsp;
+                            <Import />
                         </Grid>
                     </Grid>
                 </div>

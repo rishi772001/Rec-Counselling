@@ -21,13 +21,13 @@ export default function ButtonAppBar(props) {
                     }
 
                     {(localStorage.getItem("admin") === "true")&&
-                    <Button variant={"danger"} onClick={() => window.location.replace("/admin")}>Home</Button>}
+                    <Button variant={"danger"} style={{color: "white"}} onClick={() => window.location.replace("/admin")}>Home</Button>}
 
                     {(localStorage.getItem("staff") !== null)&&
-                    <Button variant={"danger"} onClick={() => window.location.replace("/staff")}>Home</Button>}
+                    <Button variant={"danger"} style={{color: "white"}} onClick={() => window.location.replace("/staff")}>Home</Button>}
 
                     {(localStorage.getItem("staff") !== null || localStorage.getItem("admin") !== null )&&
-                    <Button variant={"danger"} onClick={props.logout}>LogOut</Button>}
+                    <Button variant={"danger"} style={{color: "white"}} onClick={props.logout}>LogOut</Button>}
 
                 </Toolbar>
             </AppBar>
