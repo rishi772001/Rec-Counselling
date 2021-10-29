@@ -140,7 +140,7 @@ class Students extends React.Component {
                                             Year: <br/>
                                         </label>
                                     </div>
-                                    <select className={"select"} defaultValue={this.state.year}
+                                    <select className={"select"} value={this.state.year}
                                             name="year" onChange={this.handleChangeMain}>
                                         <option className={"option"} value="1">1
                                         </option>
@@ -162,7 +162,7 @@ class Students extends React.Component {
                                             Semester: <br/>
                                         </label>
                                     </div>
-                                    <select className={"select"} defaultValue={this.state.sem}
+                                    <select className={"select"} value={this.state.sem}
                                             name="sem" onChange={this.handleChangeMain}>
                                         <option className={"option"} value="1">1
                                         </option>
@@ -196,7 +196,7 @@ class Students extends React.Component {
                                         </label>
                                     </div>
 
-                                    <select className={"select"} defaultValue={this.state.dept}
+                                    <select className={"select"} value={this.state.dept}
                                             name="dept" onChange={this.handleChangeMain}>
 
                                         <option className={"option"}
@@ -262,7 +262,7 @@ class Students extends React.Component {
                                         required
                                         fullWidth
                                         name="cgpa"
-                                        label="CGPA"
+                                        label="CGPA(Sem 1/ Sem 2/ Sem 3)"
                                         value={this.state.cgpa}
                                         type="text"
                                         id="cgpa"
