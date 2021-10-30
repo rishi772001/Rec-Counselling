@@ -235,7 +235,7 @@ class Grievances extends Component {
                                     <Grid item xs={12}>
                                         <div className={"radio-div"}>
                                             <label>
-                                                General Issues: <br/>
+                                                General Feedback: <br/>
                                             </label>
                                         </div>
                                         <select className={"select"} defaultValue={this.state.generalIssues}

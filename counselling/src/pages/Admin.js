@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import XLSX from 'xlsx';
 import Grid from "@mui/material/Grid";
 import Import from "../components/Import";
+
 class Admin extends Component {
     constructor(props) {
         super(props);
@@ -32,17 +33,17 @@ class Admin extends Component {
                 if (snap.val() !== null) {
                     let data = snap.val();
                     for (let i in data) {
-                        if(data[i]["grievances"] !== undefined) {
+                        if (data[i]["grievances"] !== undefined) {
                             array.push(data[i])
                         }
                     }
                 }
-                this.setState({"data": array}, () => console.log(this.state))
+                this.setState({"data": array})
             })
         } else {
             let startDate = new Date(start);
             let endDate = new Date(end);
-            if(endDate < startDate){
+            if (endDate < startDate) {
                 alert("Start Date cannot be high than End Date");
                 return;
             }
@@ -51,7 +52,7 @@ class Admin extends Component {
                 if (snap.val() !== null) {
                     let data = snap.val();
                     for (let i in data) {
-                        if(data[i]["grievances"] !== undefined) {
+                        if (data[i]["grievances"] !== undefined) {
                             let db = new Date(data[i]["grievances"]["date"]);
                             endDate.setDate(endDate.getDate() + 1);
 
@@ -71,19 +72,19 @@ class Admin extends Component {
 
     export = () => {
         let data = []
-        for(let i in this.state.data){
+        for (let i in this.state.data) {
             let temp = {
-                "Roll No" : this.state.data[i].rollNo,
-                "Department" : this.state.data[i].dept,
-                "Name" : this.state.data[i]["name"],
-                "Year" : this.state.data[i]["year"],
-                "Date" : this.state.data[i]["grievances"]["date"],
-                "Hostel Issues" : this.state.data[i]["grievances"]["hostelIssues"],
-                "Canteen Issues" : this.state.data[i]["grievances"]["canteenIssues"],
-                "Transport Issues" : this.state.data[i]["grievances"]["transportIssues"],
-                "Academic Issues" : this.state.data[i]["grievances"]["academicIssues"],
-                "Other Issues" : this.state.data[i]["grievances"]["otherIssues"],
-                "Faculty remarks" : this.state.data[i]["grievances"]["facultyRemarks"],
+                "Roll No": this.state.data[i].rollNo,
+                "Department": this.state.data[i].dept,
+                "Name": this.state.data[i]["name"],
+                "Year": this.state.data[i]["year"],
+                "Date": this.state.data[i]["grievances"]["date"],
+                "Hostel Issues": this.state.data[i]["grievances"]["hostelIssues"],
+                "Canteen Issues": this.state.data[i]["grievances"]["canteenIssues"],
+                "Transport Issues": this.state.data[i]["grievances"]["transportIssues"],
+                "Academic Issues": this.state.data[i]["grievances"]["academicIssues"],
+                "Other Issues": this.state.data[i]["grievances"]["otherIssues"],
+                "Faculty remarks": this.state.data[i]["grievances"]["facultyRemarks"],
             }
             console.log(temp)
             data.push(temp)
@@ -115,9 +116,11 @@ class Admin extends Component {
                             End Date: <TextField type={"date"} id={"endDate"}/> &nbsp;
                         </Grid>
                         <Grid item xl>
-                            <Button onClick={this.fetch} size={"small"} variant={"contained"} color={"primary"}>Fetch</Button> &nbsp;
-                            <Button onClick={this.export}size={"small"} variant={"contained"} color={"secondary"}>Export</Button> &nbsp;
-                            <Import />
+                            <Button onClick={this.fetch} size={"small"} variant={"contained"}
+                                    color={"primary"}>Fetch</Button> &nbsp;
+                            <Button onClick={this.export} size={"small"} variant={"contained"}
+                                    color={"secondary"}>Export</Button> &nbsp;
+                            <Import/>
                         </Grid>
                     </Grid>
                 </div>

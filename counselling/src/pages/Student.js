@@ -131,7 +131,7 @@ class Students extends React.Component {
                                         label="Name"
                                         value={this.state.name}
                                         name="name"
-                                        onChange={this.handleChangeMain}
+                                        disabled
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -141,7 +141,7 @@ class Students extends React.Component {
                                         </label>
                                     </div>
                                     <select className={"select"} value={this.state.year}
-                                            name="year" onChange={this.handleChangeMain}>
+                                            name="year" disabled>
                                         <option className={"option"} value="">Select
                                         </option>
                                         <option className={"option"} value="1">1
@@ -165,7 +165,7 @@ class Students extends React.Component {
                                         </label>
                                     </div>
                                     <select className={"select"} value={this.state.sem}
-                                            name="sem" onChange={this.handleChangeMain}>
+                                            name="sem" disabled>
                                         <option className={"option"} value="">Select
                                         </option>
                                         <option className={"option"} value="1">1
@@ -201,7 +201,7 @@ class Students extends React.Component {
                                     </div>
 
                                     <select className={"select"} value={this.state.dept}
-                                            name="dept" onChange={this.handleChangeMain}>
+                                            name="dept" disabled>
                                         <option className={"option"} value="">Select
                                         </option>
                                         <option className={"option"}
@@ -271,7 +271,7 @@ class Students extends React.Component {
                                         value={this.state.cgpa}
                                         type="text"
                                         id="cgpa"
-                                        onChange={this.handleChangeMain}
+                                        disabled
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -283,7 +283,7 @@ class Students extends React.Component {
                                         type="text"
                                         value={this.state.arrearCount}
                                         id="arrearCount"
-                                        onChange={this.handleChangeMain}
+                                        disabled
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
